@@ -1,0 +1,72 @@
+<%- include head.ejs %>
+	<header>
+		<a href="../scenes">view all scenes</a>
+	</header>
+		<form action="../scene/<%= msg._id %>" method="post">
+			<label>last message</label><input type="text" name="last_message" value="<%= msg.last_message %>"><br>
+			<label>Triggers</label><input type="text" name="action" value="<%= msg.action %>"><br>
+			<label>Room</label><input type="number" name="room" value="<%= msg.room %>"><br>
+			<textarea type="text" name="text"><%= (msg.text)? msg.text : '' %></textarea><br>
+			<% var d = new Date(msg.updated_at) %>
+			<%= (msg.ip)? msg.ip : '-' %> updated <time><%= d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() %></time><br>
+			<div class="form_submit">
+				<a href="/scene/delete/<%= msg._id %>">delete</a> <input type="submit" value="UPDATE">
+			</div>
+		</form>
+
+		<center>revisions</center>
+		<table>
+		<thead>
+			<tr><td>triggers</td><td>text</td><td>last message</td><td>user</td></tr>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < revs.length; i++) { %>
+				<% rev = revs[i]; %>
+				<tr>
+					<td><pre><%= rev.action %></pre></td>
+					<td><pre><%= rev.text %></pre></td>
+					<td><pre><%= rev.last_message.join('\n') %></pre></td>
+					<td><a href="../user/<%= rev.ip.replace(/\./g, '_') %>"><%= rev.ip %></a></td>
+				</tr>
+			<% } %>
+		</tbody>
+		</table>
+		
+		<% if (locals.past_msgs) { %>
+		<center>linked from scenes</center>
+		<table>
+			<thead>
+				<tr><td>triggers</td><td>text</td><td>views</td></tr>
+			</thead>
+			<tbody>
+				<% for (var i = 0; i < past_msgs.length; i++) { %>
+					<% msg = past_msgs[i]; %>
+					<tr x-href="../scene/<%= msg._id %>" x-last_message="<%= msg.last_message %>">
+						<td><pre><%= msg.action.join('\n') %></pre></td>
+						<td><pre><%= msg.text %></pre></td>
+						<td><%= msg.views %></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<% } %>
+		
+		<% if (locals.future_msgs) { %>
+		<center>linked to scenes</center>
+		<table>
+		<thead>
+			<tr><td>triggers</td><td>text</td><td>views</td></tr>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < future_msgs.length; i++) { %>
+				<% msg = future_msgs[i]; %>
+				<tr x-href="../scene/<%= msg._id %>" x-last_message="<%= msg.last_message %>">
+					<td><pre><%= msg.action.join('\n') %></pre></td>
+					<td><pre><%= msg.text %></pre></td>
+					<td><%= msg.views %></td>
+				</tr>
+			<% } %>
+		</tbody>
+		</table>
+		<% } %>
+<%- include foot.ejs %>

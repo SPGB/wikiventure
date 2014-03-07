@@ -1,0 +1,65 @@
+<avonwodahs> moderated?
+<nanenj_> There's a word I wanted, but it basically means multiple apps on a single site.
+<avonwodahs> here's how i'm editting the scenes: http://wikiventure.samgb.com/messages
+<avonwodahs> and i'm dividing each scene into a room number, so each room contains a dozen scenes
+<nanenj_> In this case, I mean make it so you can have multiple scenarios/books and not just have someone wackify it to get into their own scenario.
+<nanenj_> I would also add accounts and accreditation.
+<nanenj_> Like, let people sign up, when someone creates a scene, label it as created by, if someone edits it, store the edit as the newest, but say 'created by so and so edited by blah' and let people look at revisions.
+<avonwodahs> yeah that's a good idea, i added a revision history which is by ip, but accredited is a good idea. similar to how wikipedia does it
+<nanenj_> but, it's very neat, I'd definitely play with and contribute to it.
+<avonwodahs> cool, I'd definitely appreciate the help
+<nanenj_> Also, your text when 'No one has done this before, what do you do.  Wasn't clear enough for my brain.
+<nanenj_> I thought it was asking me to define the action again.
+<nanenj_> Had to edit it to add the correct result text.
+<avonwodahs> ah, yeah that's a good point. What do you think would be clearer?
+<nanenj_> Just say 'describe the result of <your action here>'
+<nanenj_> So if they say 'Open window' like I did.   It'd say 'Describe what happens when you 'open window'' or something like that.
+<nanenj_> There's a lot of neat neat neat neat things you could do with this interface btw.  But, I think all my suggestions might be overload.
+<avonwodahs> no such thing as overload!
+<avonwodahs> I added a couple things such as auto suggest, still adding though (just started it today)
+<nanenj_> Like, adding clickables.  For example, like the 'find clean clothes' mentions the windowpane, which is why I wanted to open the window.  Could make 'windowpane' a clickable link or maybe just hoverable, so you could examine that particular object more closely.
+<nanenj_> Perhaps alias the hover action to the same text that would be as if you typed 'look at <object>'
+<avonwodahs> yeah I like that a lot, all the calls are just ajax so i could easily throw in a look at x inside a tooltip on hover
+<nanenj_> How do I leave the room?
+<avonwodahs> right now it's just that after 5 commands it wil play this message: http://wikiventure.samgb.com/edit/52c08ec3d7e1366f7c000001 and end there
+<avonwodahs> I'm still thinking through the plot
+<nanenj_> Hehe, that's a reason you should make it so there can be more than one adventure ;)    You actually have something that has an -EXTREME- amount of potential.
+<avonwodahs> hmm, yeah I could open source if after it's done and let people mod it if they want
+<nanenj_> Add the ability to make multiple adventures, allow someone to define and link their own rooms.  (No actual mapping needed).  Add in a basic inventory system as well as 'locks' and 'keys' and you've got a web-based single player muck :P
+<nanenj_> locks and keys are basic puzzle building elements in IF games, basically, an object or location is locked until you present the correct key.   Then you can unlock that room, object or whatever and progress with the story.
+<nanenj_> Given that you are storing things server side, I'm pretty sure you could even add in multiplayer stuff pretty easy by querying what accounts are currently on the page and have been active in the past 10 minutes.
+<avonwodahs> are inventories usually tied to a player or a room?
+<nanenj_> So, it's a little bit different to wrap your mind about, but, if this were a muck.  EVERYTHING would be an object.
+<nanenj_> Even a room is an object (a container actually)
+<nanenj_> A rooms inventory, is basically anything contained inside of it.
+<nanenj_> A players inventory, likewise, is everything inside the player.
+<nanenj_> and a bags inventory... likewise, is everything isnide the bag.
+<nanenj_> Some objects will be flagged as 'non-openable' so, when it's got that flag, nothing can be put inside ot
+<nanenj_> So, a refridgerator would be openable, and you can put things inside it.
+<nanenj_> however, a steak likely wouldn't be openable.
+<avonwodahs> interesting, so a player can access a room's inventory and vice versa?
+<nanenj_> Basically, when you're in a room, yes, you see everything inside the room.
+<avonwodahs> how big are inventories typically?
+<nanenj_> If you were to enter a bag (as a 'wiz' on mucks you can sometimes do this) you'd see everything inside the bag. :P  A muck I play on someone carries around a lamp, and their character is a genie, they can actually pull you inside their lamp :)
+<avonwodahs> also what are common IF tropes?
+<avonwodahs> story wise
+<nanenj_> Inventories usually only have limits if it's conducive to the story in IF.  On mucks, you're unlimited.
+<nanenj_> Common IF tropes are mazes, lock and key puzzles, combining objects, collection, searching, exploring a place and finding a 'clue' before an option presents itself to you.
+<avonwodahs> is there a command like 'inspect inventory' or how do you interface usually?
+<nanenj_> Sometimes they'll be cool about it and if you just think it's obvious to dunk something in the fountain it will let you, other times it won't let you until you discover the clue.
+<nanenj_> There's a set of common verbs in most IF games.
+<nanenj_> inventory or inv is one of them
+<nanenj_> 'look at' or 'examine' are common verbs.
+<nanenj_> as well as 'get' 'get x from y' 'put x in y' 'unlock' 'open' 'close' 'lock' sometimes sensory verbs are included 'touch' 'smell' 'listen'.
+<nanenj_> 'move dir' is common, but, in this style thing, it'd be more likely you'd have linked rooms and someone would type a short trigger or room description to mvoe to that room.
+<nanenj_> Like, to go from the tavern bedroom downstairs, one would simply type downstairs or go downstairs
+<nanenj_> 'drop' is a common one I missed.   'eat' 'drink' are popular in some.
+<avonwodahs> the ones I played had quaff I think
+<avonwodahs> not sure the name, anorak or something similar was the one I have most experience with
+<nanenj_> In a 'dumb' sense, it'd be trivial to add interactions to an item.  If someone tried something with an object you could simply let them edit the text and if neccessary change the state of the object.
+<nanenj_> Would be slightly more complex, but an example I could think of is if someone had something, like a plate.
+<nanenj_> and they chose to 'throw plate'
+<nanenj_> You could present them 'No one has attempted to do this with the plate before, describe what happens.'
+<nanenj_> and also let them choose that it should be removed from inventory and 'pieces of glass' should be created in the room.
+<avonwodahs> hmm interesting, it seems like the latter would be more wiki-oriented
+<avonwodahs> ok nose back to the grind-stone, going to add items, inventories, room objects, accredit/mod users

@@ -1,0 +1,17 @@
+<%- include ../head.ejs %>
+<header>
+	<a href="user/new">sign up</a> 
+	<% if (locals.current_user) { %>
+		<a href="../logout">log out</a>
+	<% } else { %>
+		<a href="../login">log in</a>
+	<% } %>
+</header>
+
+<form action="user/new" method="post">
+	<h3>login</h3>
+	<label>name</label><input type="text" name="name" placeholder="name"><br>
+	<label>password</label><input type="password" name="password" placeholder="password"><br>
+	<div class="form_submit"><input type="submit" value="log in"></div>
+</form>
+<%- include ../foot.ejs %>

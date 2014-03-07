@@ -1,0 +1,49 @@
+<%- include ../head.ejs %>
+		<form action="../item/<%= item._id %>" method="post">
+			<label>name</label><input type="text" name="name" value="<%= item.name %>"><br>
+			<label>linked scenes</label><input type="text" name="from_scene" value="<%= item.from_scene %>"><br>
+			<label>actions</label><input type="text" name="action" value="<%= item.action %>"><br>
+			<img src="../img/<%= item.name.replace(/\s+/g, '') %>.svg" class="size_detail" />
+			<textarea type="text" name="text"><%= (item.text)? item.text : '' %></textarea><br>
+			<div class="form_submit">
+				<a href="/">delete</a> <input type="submit" value="UPDATE">
+			</div>
+		</form>
+		
+		<% if (locals.revs && locals.revs.length > 0) { %>
+		<center>revisions</center>
+		<table>
+		<thead>
+			<tr><td>triggers</td><td>text</td><td>last message</td><td>ip</td></tr>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < revs.length; i++) { %>
+				<% rev = revs[i]; %>
+				<tr>
+					<td><%= rev.action %></td>
+					<td><%- rev.text.split("\n").join("<br>") %></td>
+					<td><%= rev.last_message %></td>
+					<td><%= rev.ip %></td>
+			<% } %>
+		</tbody>
+		</table>
+		<% } %>
+		
+		<% if (locals.msgs && locals.msgs.length > 0) { %>
+		<center>linked scenes</center>
+		<table>
+		<thead>
+			<tr><td>triggers</td><td>text</td><td>views</td></tr>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < msgs.length; i++) { %>
+				<% msg = msgs[i]; %>
+				<tr x-last_message="<%= msg.last_message %>">
+					<td><a href="../scene/<%= msg._id %>"><%= msg.action %></a></td>
+					<td><a href="../scene/<%= msg._id %>"><%- msg.text.split("\n").join("<br>") %></a></td>
+					<td><%= msg.views %></td>
+			<% } %>
+		</tbody>
+		</table>
+		<% } %>
+<%- include ../foot.ejs %>

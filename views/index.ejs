@@ -1,0 +1,20 @@
+<%- include head.ejs %>
+	<div id="border_left"></div>
+	<div id="border_right"></div>
+	<h2>
+		<span id="previous_scene"><% for (var i = 0; i < msgs.length - 1; i++) { %>
+		<p><%- msgs[i].text %></p>
+		<% } %>
+		</span>
+		<span id="current_scene">
+			<%- msgs[msgs.length - 1].text.split("\n").join("<br>") %>
+			<a href="scene/<%= msgs[msgs.length - 1]._id %>" id="edit">edit</a>
+		</span>
+	</h2>
+	<form action="do" method="POST">
+		<div class="suggestion_left">&lt;</div>
+		<div class="suggestion_right">&gt;</div>
+		<div class="suggestion_box"></div>
+		<input id="your_action" type="text" name="action" placeholder="What would you like to do? Press enter when ready." autocomplete="off"> 
+	</form>
+<%- include foot.ejs %>

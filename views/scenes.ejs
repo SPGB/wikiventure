@@ -1,0 +1,45 @@
+<%- include head.ejs %>
+<form action"messages" method="GET">
+	<label>room</label><select name="room" autocomplete="off">
+		<option value="" <%= (room == '')? 'selected="selected"' : '' %>>any room</option>
+		<option value="0" <%= (room == '0')? 'selected="selected"' : '' %>>0 - tavern room</option>
+		<option value="1" <%= (room == '1')? 'selected="selected"' : '' %>>1 - talk with Tavern Barkeep</option>
+		<option value="2" <%= (room == '2')? 'selected="selected"' : '' %>>2 - Tavern bar</option>
+		<option value="3" <%= (room == '3')? 'selected="selected"' : '' %>>3 - Jail Cell</option>
+		<option value="4" <%= (room == '4')? 'selected="selected"' : '' %>>4 - Cult Chamber</option>
+		<option value="5" <%= (room == '5')? 'selected="selected"' : '' %>>5 - The Ritual</option>
+	</select><br>
+	<label>text contains</label><input type="text" placeholder="text contains" name="text" autocomplete="off" value="<%= (text)?  text : '' %>"><br>
+	<label>trigger contains</label><input type="text" placeholder="trigger contains" name="triggers" autocomplete="off" value="<%= (triggers)?  triggers : '' %>"><br>
+	<label>sort by</label><select name="sort" autocomplete="off">
+		<option value="action" <%= (sort == 'action')? 'selected="selected"' : '' %>>action - ascending</option>
+		<option value="-action" <%= (sort == '-action')? 'selected="selected"' : '' %>>action - descending</option>
+		<option value="views" <%= (sort == 'views')? 'selected="selected"' : '' %>>views - ascending</option>
+		<option value="-views" <%= (sort == '-views')? 'selected="selected"' : '' %>>views - descending</option>
+		<option value="text" <%= (sort == 'text')? 'selected="selected"' : '' %>>text - ascending</option>
+		<option value="-text" <%= (sort == '-text')? 'selected="selected"' : '' %>>text - descending</option>
+		<option value="updated_at" <%= (sort == 'updated_at')? 'selected="selected"' : '' %>>updated date - ascending</option>
+		<option value="-updated_at" <%= (sort == '-updated_at')? 'selected="selected"' : '' %>>updated date - descending</option>
+	</select><br>
+	<div class="form_submit">
+		<a href="scenes">reset filter</a>
+		<input type="submit" value="filter">
+	</div>
+</form>
+		
+<table>
+	<thead>
+		<tr><td><a href="scenes?sort=action">triggers</a></td><td><a href="scenes?sort=text">text</a></td><td><a href="scenes?sort=views">views</a></td></tr>
+	</thead>
+	<tbody>
+		<% for (var i = 0; i < msgs.length; i++) { %>
+		<% m = msgs[i]; %>
+		<tr x-href="scene/<%= m._id %>">
+		<td><pre><%= m.action.join('\n') %></pre></td>
+		<td><pre><%= m.text %></pre></td>
+		<td><%= m.views %></td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+<%- include foot.ejs %>

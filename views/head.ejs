@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, minimum-scale=1, user-scalable=no">
+	<link rel="icon" type="image/png" href="../img/favicon.png" />
+	<meta name="description" content="Wikiventure. Crowd Sourced choose-your-own-adventure.">
+	<title><%= (locals.title)? title + ' - ': '' %>Wikiventure</title>
+	
+</head>
+<body>
+	<link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
+	<link href='../css/main.css' rel='stylesheet' type='text/css'>
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="../js/main.min.js"></script>
+	<script>
+		<% if (locals.scenes) { %>
+		var scenes = new String('<%= scenes %>').split(',');
+		<% } else { %>
+		var scenes = [];
+		<% } %>
+		var suggestions = new String('<%= (locals.suggestions)? suggestions : '' %>').split(',');
+		var inventory = <%- (locals.items && items.length > 0)? JSON.stringify(items) : '[]' %>;
+		var room = <%= (locals.msgs && msgs[0] && msgs[0].room)? msgs[0].room : 0 %>;
+	</script>
+	<a href="/"><h1><img src="../img/sword.svg" id="size_logo" /><span>Wiki</span>venture</h1></a>
+	<div id="settings">
+		<div class="inner_menu">
+			<% if (locals.current_user) { %>	
+				<a href="../user/<%= current_user %>"><%= current_user %></a>
+			<% } else { %>
+				<a href="../user/new">sign up</a>
+			<% } %>
+			<a href="../restart">restart</a>
+			<a href="../scenes">scenes</a>
+			<a href="../items">items</a>
+			<a href="../users">users</a>
+		</div>
+	</div>
+	<div id="inventory">
+		inventory
+		<div class="inventory_item empty"></div>
+		<div class="inventory_item empty"></div>
+		<div class="inventory_item empty"></div>
+		<div class="inventory_item empty"></div>
+		<div class="inventory_item empty"></div>
+	</div>
+	<% if (locals.alert) { %>
+		<div class="alert"><%= alert %></div>
+	<% } %>
+	<div class="text_container">

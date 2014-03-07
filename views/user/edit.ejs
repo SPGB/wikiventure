@@ -1,0 +1,35 @@
+<%- include ../head.ejs %>
+<header>
+	<a href="user/new">sign up</a> 
+	<% if (locals.current_user) { %>
+		<a href="../logout">log out</a>
+	<% } else { %>
+		<a href="../login">log in</a>
+	<% } %>
+</header>
+
+<% if (!user.name) { %>
+	no user found
+<% } else { %>
+	
+	name: <%= user.name %><br>
+	created at: <%= user.created_at %><br>
+	updated at: <%= user.updated_at %><br>
+	user level: <%= user.level %> (<%= (user.level == 1)? 'moderator' : 'user' %>)<br>
+<% } %>
+<center><%= revs.length %> revisions</center>
+<table>
+	<thead>
+		<tr><td>triggers</td><td>text</td><td>last message</td></tr>
+	</thead>
+	<tbody>
+		<% for (var i = 0; i < revs.length; i++) { %>
+		<% rev = revs[i]; %>
+		<tr x-href="../scene/<%= rev.message_id %>">
+		<td><pre><%= rev.action %></pre></td>
+		<td><pre><%= rev.text %></pre></td>
+		<td><pre><%= rev.last_message.join('\n') %></pre></td>
+		<% } %>
+	</tbody>
+</table>
+<%- include ../foot.ejs %>
