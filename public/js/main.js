@@ -98,7 +98,9 @@ $(document).ready(function () {
 					$('h2 textarea').focus();
 					return;
 				}
-				$('.tooltip.examining').html(j.text.split("\n").join("<br>") + '<a style="" id="edit" href="scene/' + j._id + '">edit</a>').removeClass('examining');
+				if (j._id) {
+					$('.tooltip.examining').html(j.text.split("\n").join("<br>") + '<a style="" id="edit" href="scene/' + j._id + '">edit</a>').removeClass('examining');
+				}
 			},
 			error: function (j) {
 				var span = $('.tooltip.examining').parent();
@@ -179,7 +181,7 @@ $(document).ready(function () {
 					if (j.text) {
 						$('#current_scene a').remove();
 						$('#previous_scene').append('<p>' + $('#current_scene').html() + '</p>');
-						$('#current_scene').html(j.text.split("\n").join("<br>") + '<a id="edit" style="" href="scene/' + j._id + '">edit</a>');
+						if (j._id) $('#current_scene').html(j.text.split("\n").join("<br>") + '<a id="edit" style="" href="scene/' + j._id + '">edit</a>');
 						if (j.items.length > 0) {
 							add_item(j.items[0]);
 							$('#current_scene').prepend('<img src="img/' + j.items[0].name.replace(/\s+/g, '') + '.svg" class="size_medium" />');

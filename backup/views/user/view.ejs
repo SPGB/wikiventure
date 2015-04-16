@@ -1,0 +1,24 @@
+<%- include ../head.ejs %>
+	<header>
+		<a href="user/new">sign up</a> 
+		<% if (locals.current_user) { %>
+			<a href="../logout">log out</a>
+		<% } else { %>
+			<a href="../login">log in</a>
+		<% } %>
+	</header>
+		<table>
+		<thead>
+			<tr><td>name</td><td>last active</td><td>user level</td></tr>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < users.length; i++) { %>
+				<% var u = users[i]; %>
+				<tr x-href="user/<%= u.name %>">
+					<td><%= u.name %></pre></td>
+					<td><%= u.updated_at %></pre></td>
+					<td><%= u.level %> (<%= (u.level == 1)? 'moderator' : 'user' %>)</td>
+			<% } %>
+		</tbody>
+		</table>
+<%- include ../foot.ejs %>
