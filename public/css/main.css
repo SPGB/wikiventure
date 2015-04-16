@@ -120,10 +120,16 @@ a#edit {
     width: calc(100% - 10px);
 }
 input[type="submit"] {
-    background-color: #ddd;
+    background-color: #B163A3;
     border: medium none;
     padding: 5px;
     cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border: none !important;
+    border-radius: 4px;
+    text-transform: capitalize;
 }
 input[type="submit"]:hover {
     background-color: #cdcdcd;
@@ -165,9 +171,9 @@ label {
     width: 150px;
 }
 table {
-    margin-left: -240px;
-    width: 960px;
+    max-width: 100%;
     background-color: #fff;
+    clear: both;
 }
 tbody img {
     background-color: #FDFDFD;
@@ -194,7 +200,8 @@ thead td {
 .form_submit {
     float: right;
     background: #f7f7f7;
-    padding: 5px;
+    padding: 0 20px;
+    margin-bottom: 20px;
 }
 h2 {
     font-size: 20px;
@@ -414,6 +421,35 @@ tr[x-active="false"] {
 canvas {
     position: absolute;
     z-index: -1;
+}
+#current_scene svg {
+  display: block;
+  margin: 0 auto;
+}
+#current_scene path {
+    fill-opacity: 0;
+    stroke: #B163A3;
+    stroke-width: 3;
+    stroke-dasharray: 1080;
+    stroke-dashoffset: 1080;
+    -moz-animation: beedash 4s infinite;
+    -webkit-animation: beedash 4s infinite;
+    animation: beedash 4s infinite;
+}
+@-moz-keyframes beedash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes beedash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes beedash {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 @media all and (max-width : 960px) {
     body {

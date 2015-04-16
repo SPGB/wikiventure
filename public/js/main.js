@@ -128,7 +128,7 @@ $(document).ready(function () {
 	$('body').on('mouseout', 'span[x-name]', function (e) { 
 		$('.tooltip:visible').hide();
 	});
-	$('form[action="do"]').submit(function () {
+	$('form[action="scene"]').submit(function () {
 		$('.alert').remove();
 		last_action = format_input( $('input#your_action').val() );
 		
@@ -175,7 +175,7 @@ $(document).ready(function () {
 					scenes.push(j._id);
 					suggestions = j.suggestions;
 					if (scenes.length > max_scenes_len) {
-						$('body').append('<div class="alert">Wikiventure is just beginning. you have reached the furthest point currently in the game. <br /> type "begin" to start again</div>');
+						$('body').append('<div class="alert">Wikiventure is just beginning. you have reached the furthest point currently in the game. <br /> type <b>begin</b> to start again</div>');
 						scenes = [];
 					}
 					if (j.text) {
@@ -184,7 +184,14 @@ $(document).ready(function () {
 						if (j._id) $('#current_scene').html(j.text.split("\n").join("<br>") + '<a id="edit" style="" href="scene/' + j._id + '">edit</a>');
 						if (j.items.length > 0) {
 							add_item(j.items[0]);
-							$('#current_scene').prepend('<img src="img/' + j.items[0].name.replace(/\s+/g, '') + '.svg" class="size_medium" />');
+							$.ajax({
+								url: 'img/' + j.items[0].name.replace(/\s+/g, '') + '.svg',
+								dataType: 'xml',
+								success: function (svgDoc) {
+									var importedSVGRootElement = document.importNode(svgDoc.documentElement,true);
+									$('#current_scene').prepend(importedSVGRootElement);
+								}
+							});
 						}
 					} else {
 						$('#current_scene').html('<i>no text :(<br>Please improve Wikiventure and add some.</i>' + 

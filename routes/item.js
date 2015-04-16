@@ -22,7 +22,7 @@ module.exports = (function() {
 		new_item = new Item(req.body);
 		new_item.save(function (err, i) {
 			if (err) return res.render('item/create', { alert: err });
-			res.redirect('/items');
+			res.redirect('/item/all');
 		});
 	});
 	router.get('/:id', function (req, res) {
